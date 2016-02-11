@@ -24,6 +24,16 @@ angular.module('myApp.login', ['ngRoute'])
             });
         };
 
+        $scope.micLogin = function () {
+            var promise = $kinvey.User.MIC.loginWithAuthorizationCodeLoginPage('http://example.com/callback');
+            promise.then(function(user) {
+                $scope.showLogin = false;
+            }, function(err) {
+                console.log("mic login error " + JSON.stringify(err));
+                alert("Error: " + err.description);
+            });
+        };
+
         $scope.logout = function () {
             var user = $kinvey.getActiveUser();
             if (null !== user) {
