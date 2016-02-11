@@ -1,12 +1,40 @@
 'use strict';
 
+
+var initialized = false;
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+var app = angular.module('myApp', [
+    'ngRoute',
+    "kinvey",
+    'ui.bootstrap',
+    'myApp.login',
+    'myApp.partners',
+    'myApp.todos',
+    'myApp.insert'
+]);
+
+app.constant('kinveyConfig', {
+    appKey: 'kid_bJg1ypzual',
+    appSecret: 'd5e16c9315274c93920dc14f6ee79f0b'
+});
+
+app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function($kinvey, $rootScope, $location, kinveyConfig) {
+    $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+        if (!initialized) {
+            event.preventDefault(); // Stop the location change
+            // Initialize Kinvey
+            $kinvey.init(kinveyConfig).then(function () {
+                initialized = true;
+                if($kinvey.getActiveUser()){
+                    $location.path('/login');
+                }
+            }, function (err) {
+            });
+        }
+    });
+}]);
+
+
+app.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.otherwise({redirectTo: '/login'});
 }]);

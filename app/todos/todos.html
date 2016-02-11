@@ -1,0 +1,19 @@
+<div class="row book" ng-repeat="todo in todos">
+    <div class="col-md-8">
+        <h3></h3>
+        <p>
+            <b>{{todo.action}}</b>   {{todo.date}} {{todo.completed}}
+        </p>
+        <div>
+            <button type="button" class="btn btn-danger" ng-click="deleteTodo(todo, $index)">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="row add-book">
+    <div class="col-md-12">
+        <div class="well text-center" ng-click="loadTodos()">
+            <h1>Reload Todos</h1>
+        </div>
+    </div>
+</div>

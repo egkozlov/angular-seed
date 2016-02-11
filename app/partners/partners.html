@@ -1,0 +1,26 @@
+<div class="row">
+    <button ng-click="sortPartners()">Sort</button>
+    <button ng-click="skipPartners()">Skip</button>
+    <button ng-click="limitPartners()">Limit4</button>
+</div>
+
+<div class="row" ng-repeat="partner in partners">
+    <div class="col-md-8">
+        <h3></h3>
+        <p>
+            <b>{{partner.partner_name}}</b>   {{partner.partner_company}}
+        </p>
+        <!--<div>-->
+            <!--<button type="button" class="btn btn-danger" ng-click="vm.delete(book)">Delete</button>-->
+            <!--<button type="button" class="btn btn-primary" ng-click="vm.view(book)">View More...</button>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<div class="row add-book">
+    <div class="col-md-12">
+        <div class="well text-center" ng-click="loadPartners()">
+            <h1>Reload Partners</h1>
+        </div>
+    </div>
+</div>
