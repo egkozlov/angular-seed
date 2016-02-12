@@ -16,8 +16,8 @@ var app = angular.module('myApp', [
 ]);
 
 app.constant('kinveyConfig', {
-    //apiHostName: 'myHostName',
-    //micHostName: 'myMICHostName',
+    apiHostName: 'https://baas.kinvey.com',
+    micHostName: 'https://auth.kinvey.com',
     appKey: 'kid_bJg1ypzual',
     appSecret: 'd5e16c9315274c93920dc14f6ee79f0b'
 });
@@ -40,14 +40,5 @@ app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function($kinvey,
 
 
 app.config(['$routeProvider' , function ($routeProvider) {
-    //$stateProvider.state('/', {
-    //    url: "",
-    //    views: {
-    //        "tab1": { templateUrl: "collaterals/collaterals.html" },
-    //        "tab2": { templateUrl: "partners/partners.html" },
-    //        "tab3": { templateUrl: "tab3.html" }
-    //    }
-    //});
-    //$urlRouterProvider.otherwise('/');
     $routeProvider.otherwise({redirectTo: '/login'});
 }]);

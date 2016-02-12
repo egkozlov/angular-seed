@@ -25,7 +25,7 @@ angular.module('myApp.login', ['ngRoute'])
         };
 
         $scope.micLogin = function () {
-            var promise = $kinvey.User.MIC.loginWithAuthorizationCodeLoginPage('http://example.com/callback');
+            var promise = $kinvey.User.MIC.loginWithAuthorizationCodeLoginPage('http://localhost:8000/app/index.html');
             promise.then(function(user) {
                 $scope.showLogin = false;
             }, function(err) {
