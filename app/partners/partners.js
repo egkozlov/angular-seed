@@ -14,34 +14,15 @@ angular.module('myApp.partners', ['ngRoute'])
 
         $scope.loadPartners = function(query){
             //TODO change find call
-            console.log("load click");
-            var promise = $kinvey.DataStore.find('partners', query);
+            var promise = $kinvey.DataStore.find('partner', query);
             promise.then(function(entities) {
                 $scope.partners = entities;
-            }, function(error) {
-                console.log("fetch partners error " + JSON.stringify(error));
+            }, function(err) {
+                alert("Error: " + err.description);
+                console.log("fetch partners error " + JSON.stringify(err));
             });
         };
 
         $scope.loadPartners();
-
-        $scope.sortPartners = function(){
-            var query = new $kinvey.Query();
-            query.descending('partner_name');
-            $scope.loadPartners(query)
-        };
-
-        $scope.limitPartners = function(){
-            var query = new $kinvey.Query();
-            query.limit(4);
-            $scope.loadPartners(query)
-        };
-
-        $scope.skipPartners = function(){
-            var query = new $kinvey.Query();
-            query.skip(0);
-            query.limit(1);
-            $scope.loadPartners(query)
-        }
 
     }]);

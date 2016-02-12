@@ -28,3 +28,23 @@
   content: "";
   padding: 0;
 }
+
+h2{
+  margin-left: 20px;
+}
+
+p{
+  margin: 10px 0 10px;
+}
+
+.row{
+  margin: 15px 0 15px 20px;
+}
+
+.product-wrapper p{
+  display: inline-block;
+}
+
+.product-wrapper button{
+  float: right;
+}

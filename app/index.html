@@ -11,17 +11,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 <ul class="menu">
-  <li><a href="#/login">login</a></li>
-  <li><a href="#/partners">partners</a></li>
-  <li><a href="#/todos">todos</a></li>
-  <li><a href="#/insert">insert</a></li>
+  <li><a href="#/login">Auth</a></li>
+  <li><a href="#/products">Products</a></li>
+  <li><a href="#/partners">Partners</a></li>
+  <li><a href="#/todos">ToDos</a></li>
+  <li><a href="#/collaterals">Colloteral</a></li>
+  <li><a href="#/insert">Insert</a></li>
 </ul>
 
+<!--<uib-tabset >-->
+  <!--<uib-tab>-->
+    <!--<uib-tab-heading>-->
+      <!--<a ng-href="#/login">Auth</a>-->
+    <!--</uib-tab-heading>-->
+    <!--<div ng-include="">vsd</div>-->
+  <!--</uib-tab>-->
+  <!--<uib-tab>-->
+    <!--<uib-tab-heading>-->
+      <!--<a href="#/products">Products</a>-->
+  <!--</uib-tab-heading>-->
+    <!--&lt;!&ndash;<div ui-view="/products">cs</div>&ndash;&gt;-->
+  <!--</uib-tab>-->
+<!--</uib-tabset>-->
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -31,14 +48,20 @@
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
+
+
+
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
 <script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.6.8.min.js"></script>
 <script src="app.js"></script>
 <script src="login/login.js"></script>
 <script src="partners/partners.js"></script>
 <script src="todos/todos.js"></script>
 <script src="insert/insert.js"></script>
+<script src="products/products.js"></script>
+<script src="collaterals/collaterals.js"></script>
 </body>
 </html>

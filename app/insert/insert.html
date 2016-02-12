@@ -1,22 +1,20 @@
-<div class="row books">
-    <div class="col-sm-12 col-md-6 col-md-offset-3">
-        <div class="page-header">
-            <h1>Insert To Do</h1>
-        </div>
-        <form ng-submit="insert(action, date, completed)">
-            <div class="form-group">
-                <label for="action">Task</label>
-                <input type="text" class="form-control" id="action" placeholder="Task" ng-model="action">
-            </div>
-            <div class="form-group">
-                <label for="date">Due Date</label>
-                <input type="date" class="form-control" id="date" placeholder="Due Date" ng-model="date">
-            </div>
-            <div class="form-group">
-                <label for="completed">Task Completed?</label>
-                <input type="checkbox" class="form-control" id="completed" ng-model="completed">
-            </div>
-            <button class="btn btn-primary" type="submit">Insert</button>
-        </form>
+<div class="col-sm-12 col-md-6 col-md-offset-3">
+    <div class="page-header">
+        <h1>Data Inserts</h1>
     </div>
+    <form ng-submit="insert(action, date, completed)">
+        <div class="form-group">
+            <label for="action">Task</label>
+            <input type="text" class="form-control" id="action" placeholder="Task" ng-model="action">
+        </div>
+        <div class="form-group">
+            <label for="date">Due Date</label>
+            <input type="date" class="form-control" id="date" placeholder="Due Date" ng-model="date">
+        </div>
+        <div class="form-group">
+            <label for="completed">Task Completed?</label>
+            <input type="checkbox" class="form-control" id="completed" ng-model="completed">
+        </div>
+        <button class="btn btn-primary" type="submit">Insert</button>
+    </form>
 </div>

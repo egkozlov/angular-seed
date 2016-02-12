@@ -14,24 +14,14 @@ angular.module('myApp.todos', ['ngRoute'])
 
         $scope.loadTodos = function () {
             //TODO change find call
-            var promise = $kinvey.DataStore.find('todos');
+            var promise = $kinvey.DataStore.find('todo');
             promise.then(function (entities) {
                 $scope.todos = entities;
-            }, function (error) {
-                console.log("fetch todos error " + JSON.stringify(error));
+            }, function (err) {
+                console.log("fetch todos error " + JSON.stringify(err));
+                alert("Error: " + err.description);
             });
         };
-
         $scope.loadTodos();
-
-        $scope.deleteTodo = function (todo, index) {
-            var promise = $kinvey.DataStore.destroy('todos', todo._id);
-            promise.then(function () {
-                $scope.todos = $scope.todos.splice(index, 1);
-                console.log("delete with success");
-            }, function (err) {
-                console.log("delete with error " + JSON.stringify(err));
-            });
-        }
 
     }]);
