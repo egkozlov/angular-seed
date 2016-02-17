@@ -10,17 +10,32 @@ angular.module('myApp.login', ['ngRoute'])
     }])
 
     .controller('LoginCtrl', ['$scope', '$kinvey', '$location', function ($scope, $kinvey, $location) {
-
-        $scope.showLogin = null == $kinvey.getActiveUser();
+        $kinvey.User.getActive().then(function(user){
+            console.log(JSON.stringify(user));
+            if(user){
+                console.log("check");
+                $scope.showLogin = false;
+            }else{
+                $scope.showLogin = true;
+            }
+        });
+        //console.log("user " + JSON.stringify(user));
 
         $scope.login = function (username, password) {
             console.log("username " + username);
             var promise = $kinvey.User.login(username, password);
             promise.then(function (user) {
-                $scope.showLogin = false;
+                if (user.statusCode && user.statusCode > 400) {
+                    console.log("login error " + JSON.stringify(user))
+                } else {
+                    $scope.showLogin = false;
+                    console.log("success " + JSON.stringify(user));
+                }
+                $scope.$digest();
             }, function (err) {
-                console.log("login failed " + JSON.stringify(err));
-                alert("Error: " + err.description);
+                console.log("err " + JSON.stringify(err));
+            }).catch(function (err) {
+                console.log("err " + JSON.stringify(err));
             });
         };
 
@@ -35,16 +50,20 @@ angular.module('myApp.login', ['ngRoute'])
         };
 
         $scope.logout = function () {
-            var user = $kinvey.getActiveUser();
-            if (null !== user) {
-                var promise = $kinvey.User.logout();
-                promise.then(function () {
-                    console.log("logout with success ");
-                    $scope.showLogin = true;
-                }, function (err) {
-                    console.log("logout error " + JSON.stringify(err));
-                    alert("Error: " + err.description);
-                });
-            }
+            $kinvey.User.getActive().then(function(user){
+                if (null !== user) {
+                    var promise = user.logout();
+                    promise.then(function () {
+                        console.log("logout with success ");
+                        $scope.showLogin = true;
+                        $scope.$digest();
+                    }, function (err) {
+                        console.log("logout error " + JSON.stringify(err));
+                        alert("Error: " + err.description);
+                    });
+                }
+            },function(err){
+                console.log("logout error " + JSON.stringify(err));
+            });
         }
     }]);

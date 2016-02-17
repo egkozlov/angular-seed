@@ -11,17 +11,18 @@ angular.module('myApp.insert', ['ngRoute'])
 
     .controller('InsertCtrl', ['$scope','$kinvey','$location', function ($scope, $kinvey, $location) {
 
+        var dataStore = $kinvey.DataStore.getInstance('todo');
+
         $scope.insert = function(action, date, completed){
-            var promise = $kinvey.DataStore.save('todo', {
+            var promise = dataStore.save({
                 action  : action,
                 duedate : date,
                 completed: completed
-            });
-            promise.then(function(model) {
+            }).then(function(entity) {
                 $location.path('/todos');
-            }, function(err) {
-                console.log("error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+            }, function(error) {
+                console.log("error " + JSON.stringify(error));
+                alert("Error: " + error.description);
             });
         }
     }]);

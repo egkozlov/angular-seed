@@ -10,16 +10,19 @@ angular.module('myApp.products', ['ngRoute'])
     }])
 
     .controller('ProductsCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
-        $scope.partners = [];
+        $scope.products = [];
+
+        var dataStore = $kinvey.DataStore.getInstance('vProducts');
 
         $scope.loadProducts = function(query){
-            //TODO change find call
-            var promise = $kinvey.DataStore.find('vProducts', query);
-            promise.then(function(entities) {
-                $scope.products = entities;
-            }, function(err) {
-                console.log("fetch partners error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+            dataStore.find(query).then(function (result) {
+                $scope.products = result.cache;
+                return result.network;
+            },function(err){
+                console.log("err " + JSON.stringify(err));
+            }).then(function (products) {
+                $scope.products = products;
+                $scope.$digest();
             });
         };
 
@@ -45,14 +48,12 @@ angular.module('myApp.products', ['ngRoute'])
         };
 
         $scope.deleteProduct = function (product, index) {
-            var promise = $kinvey.DataStore.destroy('vProducts', product._id);
-            promise.then(function () {
-                $scope.products = $scope.products.splice(index, 1);
-                console.log("delete with success");
+            dataStore.removeById(product._id).then(function (res) {
+                $scope.products.splice(index, 1);
+                $scope.$digest();
             }, function (err) {
                 console.log("delete with error " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
         }
-
     }]);

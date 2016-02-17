@@ -12,14 +12,17 @@ angular.module('myApp.todos', ['ngRoute'])
     .controller('TodoCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.todos = [];
 
+        var dataStore = $kinvey.DataStore.getInstance('todo');
+
         $scope.loadTodos = function () {
-            //TODO change find call
-            var promise = $kinvey.DataStore.find('todo');
-            promise.then(function (entities) {
-                $scope.todos = entities;
-            }, function (err) {
-                console.log("fetch todos error " + JSON.stringify(err));
-                alert("Error: " + err.description);
+            dataStore.find().then(function (result) {
+                $scope.todos = result.cache;
+                return result.network;
+            },function(err){
+                console.log("err " + JSON.stringify(err));
+            }).then(function (todos) {
+                $scope.todos = todos;
+                $scope.$digest();
             });
         };
         $scope.loadTodos();

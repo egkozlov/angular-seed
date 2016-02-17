@@ -12,17 +12,19 @@ angular.module('myApp.partners', ['ngRoute'])
     .controller('PartnersCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.partners = [];
 
+        var dataStore = $kinvey.DataStore.getInstance('partner');
+
         $scope.loadPartners = function(query){
-            //TODO change find call
-            var promise = $kinvey.DataStore.find('partner', query);
-            promise.then(function(entities) {
-                $scope.partners = entities;
-            }, function(err) {
-                alert("Error: " + err.description);
-                console.log("fetch partners error " + JSON.stringify(err));
+            dataStore.find().then(function (result) {
+                $scope.partners = result.cache;
+                return result.network;
+            },function(err){
+                console.log("err " + JSON.stringify(err));
+            }).then(function (partners) {
+                $scope.partners = partners;
+                $scope.$digest();
             });
         };
-
         $scope.loadPartners();
 
     }]);

@@ -22,18 +22,13 @@ app.constant('kinveyConfig', {
     appSecret: 'd5e16c9315274c93920dc14f6ee79f0b'
 });
 
-app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function($kinvey, $rootScope, $location, kinveyConfig) {
-    $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+app.run(['$kinvey', '$rootScope', '$location', 'kinveyConfig', function ($kinvey, $rootScope, $location, kinveyConfig) {
+    $rootScope.$on('$locationChangeStart', function (event, newUrl) {
         if (!initialized) {
-            event.preventDefault(); // Stop the location change
-            // Initialize Kinvey
-            $kinvey.init(kinveyConfig).then(function () {
-                initialized = true;
-                if($kinvey.getActiveUser()){
-                    $location.path('/login');
-                }
-            }, function (err) {
-            });
+            //event.preventDefault(); // Stop the location change
+            var init = $kinvey.init(kinveyConfig);
+            initialized = true;
+            $location.path('/login');
         }
     });
 }]);
