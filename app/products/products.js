@@ -18,11 +18,12 @@ angular.module('myApp.products', ['ngRoute'])
             dataStore.find(query).then(function (result) {
                 $scope.products = result.cache;
                 return result.network;
-            },function(err){
-                console.log("err " + JSON.stringify(err));
             }).then(function (products) {
                 $scope.products = products;
                 $scope.$digest();
+            }).catch(function(err){
+                console.log("err " + JSON.stringify(err));
+                alert("Error: " + err.description);
             });
         };
 
@@ -51,7 +52,7 @@ angular.module('myApp.products', ['ngRoute'])
             dataStore.removeById(product._id).then(function (res) {
                 $scope.products.splice(index, 1);
                 $scope.$digest();
-            }, function (err) {
+            }).catch(function (err) {
                 console.log("delete with error " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });

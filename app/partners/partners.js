@@ -18,11 +18,12 @@ angular.module('myApp.partners', ['ngRoute'])
             dataStore.find().then(function (result) {
                 $scope.partners = result.cache;
                 return result.network;
-            },function(err){
-                console.log("err " + JSON.stringify(err));
             }).then(function (partners) {
                 $scope.partners = partners;
                 $scope.$digest();
+            }).catch(function(err){
+                console.log("err " + JSON.stringify(err));
+                alert("Error: " + err.description);
             });
         };
         $scope.loadPartners();

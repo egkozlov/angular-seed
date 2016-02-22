@@ -13,17 +13,19 @@ angular.module('myApp.collaterals', ['ngRoute'])
         $scope.collaterals = [];
 
         $scope.loadCollaterals = function(){
-            //TODO change find call
             var query = new $kinvey.Query();
             query.equalTo('mimeType','application/pdf');
-            var promise = $kinvey.File.find(query);
+            var files = new $kinvey.Files(),
+                promise = files.find(query);
             promise.then(function(files) {
                 $scope.collaterals = files;
-            }, function(err) {
+                $scope.$digest();
+            }).catch(function(err) {
                 console.log("fetch collaterals error " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
         };
+
         $scope.loadCollaterals();
 
     }]);
