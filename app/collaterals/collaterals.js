@@ -15,8 +15,8 @@ angular.module('myApp.collaterals', ['ngRoute'])
         $scope.loadCollaterals = function(){
             var query = new $kinvey.Query();
             query.equalTo('mimeType','application/pdf');
-            var files = new $kinvey.Files(),
-                promise = files.find(query);
+            var fileStore = new $kinvey.FileStore(),
+                promise = fileStore.find(query);
             promise.then(function(files) {
                 $scope.collaterals = files;
                 $scope.$digest();

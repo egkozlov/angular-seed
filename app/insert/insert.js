@@ -19,9 +19,8 @@ angular.module('myApp.insert', ['ngRoute'])
         };
 
         $scope.insert = function (todo) {
-            var promise = dataStore.save(todo).then(function (entity) {
+            dataStore.save(todo).then(function (entity) {
                 alert("Todo was added with success");
-                $scope.digest();
                 $location.path('/todos');
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));

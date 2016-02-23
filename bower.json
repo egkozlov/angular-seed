@@ -10,8 +10,8 @@
     "angular-route": "~1.4.0",
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
-    "html5-boilerplate": "~5.2.0",
+    "angular-ui-router": "~0.2.15",
     "angular-bootstrap": "~0.14.3",
-    "kinvey-angular-lib": "^3.0.0-beta.6"
+    "kinvey-angular-lib": "^3.0.0-beta.7"
   }
 }

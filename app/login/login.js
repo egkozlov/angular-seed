@@ -35,6 +35,7 @@ angular.module('myApp.login', ['ngRoute'])
             var promise = user.loginWithMIC('http://localhost:8000/app/index.html');
             promise.then(function (user) {
                 $scope.showLogin = false;
+                $scope.$digest();
             }, function (err) {
                 console.log("mic login error " + JSON.stringify(err));
                 alert("Error: " + err.description);
@@ -42,14 +43,15 @@ angular.module('myApp.login', ['ngRoute'])
         };
 
         $scope.logout = function () {
-            $kinvey.User.logout().then(function () {
-                console.log("logout with success ");
-                $scope.showLogin = true;
-                $scope.$digest();
-            }, function (err) {
+            $kinvey.User.getActiveUser().then(function (user) {
+                    user.logout().then(function () {
+                        console.log("logout with success ");
+                        $scope.showLogin = true;
+                        $scope.$digest();
+                }).catch(function(err){
                 console.log("logout error " + JSON.stringify(err));
                 alert("Error: " + err.description);
             });
-
+        })
         }
     }]);

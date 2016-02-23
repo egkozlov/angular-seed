@@ -4,11 +4,11 @@
         <button class="btn btn-primary" ng-click="refreshTodos()">Refresh data</button>
         <button class="btn btn-primary" ng-click="syncTodos()">Sync data</button>
     </div>
-    <div class="row book" ng-repeat="todo in todos">
+    <div class="row book" ng-repeat="todo in todos track by todo._id">
         <div class="col-md-8 product-wrapper">
             <p>
                 <b ng-hide="todo.editAction">{{todo.action}}</b>
-                <input type="text" ng-show="todo.editAction" ng-model="todo.action"/>
+                <input class="form-control" type="text" ng-show="todo.editAction" ng-model="todo.action"/>
                 {{todo.duedate}} {{todo.completed}}
             </p>
             <button type="button" class="btn btn-danger" ng-click="deleteTodo(todo, $index)" style="margin-left: 5px">Delete</button>
