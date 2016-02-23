@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/login', {
-            templateUrl: 'login/login.html',
-            controller: 'LoginCtrl'
-        });
-    }])
+angular.module('myApp.login', [])
 
     .controller('LoginCtrl', ['$scope', '$kinvey', '$location', function ($scope, $kinvey, $location) {
         $kinvey.User.getActiveUser().then(function (user) {

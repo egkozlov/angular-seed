@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('myApp.insert', ['ngRoute'])
+angular.module('myApp.insert', [])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/insert', {
-            templateUrl: 'insert/insert.html',
-            controller: 'InsertCtrl'
-        });
-    }])
-
-    .controller('InsertCtrl', ['$scope','$kinvey','$location', function ($scope, $kinvey, $location) {
+    .controller('InsertCtrl', ['$scope','$kinvey','$state', function ($scope, $kinvey, $state) {
 
         var dataStore = $kinvey.DataStore.getInstance('todo',$kinvey.DataStoreType.Sync);
         $scope.todo = {
@@ -21,7 +14,7 @@ angular.module('myApp.insert', ['ngRoute'])
         $scope.insert = function (todo) {
             dataStore.save(todo).then(function (entity) {
                 alert("Todo was added with success");
-                $location.path('/todos');
+                //$state.go('todos');
             }).catch(function (err) {
                 console.log("error " + JSON.stringify(err));
                 alert("Error: " + err.description);

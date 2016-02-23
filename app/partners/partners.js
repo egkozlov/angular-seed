@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('myApp.partners', ['ngRoute'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/partners', {
-            templateUrl: 'partners/partners.html',
-            controller: 'PartnersCtrl'
-        });
-    }])
+angular.module('myApp.partners', [])
 
     .controller('PartnersCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.partners = [];

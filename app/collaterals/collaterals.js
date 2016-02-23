@@ -1,14 +1,6 @@
 'use strict';
 
-angular.module('myApp.collaterals', ['ngRoute'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/collaterals', {
-            templateUrl: 'collaterals/collaterals.html',
-            controller: 'CollateralsCtrl'
-        });
-    }])
-
+angular.module('myApp.collaterals', [])
     .controller('CollateralsCtrl', ['$scope', '$kinvey', function ($scope, $kinvey) {
         $scope.collaterals = [];
 
